@@ -532,6 +532,7 @@
                     <excludes>
                         <exclude>**/JavaWebappApi.class</exclude>
                         <exclude>**/ServiceApi.class</exclude>
+                        <exclude>**/WebhooksApi.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>
