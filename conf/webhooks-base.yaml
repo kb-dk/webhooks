@@ -49,7 +49,7 @@ config:
 
   # Inline expansion works just as full value expansion. For "userhome", the system property "user.home" is used.
   # As it has no default, an exception will be thrown by the configuration system if not defined and the value
-  # is requested. Note: Expansion is done at access time, not config load time. 
+  # is requested. Note: Expansion is done at access time, not config load time.
   userhome: "Home sweet ${user.home}"
 
   # Fallbacks for missing system properties can be defined with :-
@@ -82,3 +82,6 @@ config:
   autoupdate:
     enabled: ${env:AUTOUPDATE_ENABLED:-${autoupdate.enabled:-false}}
     intervalms: ${env:AUTOUPDATE_INTERVALMS:-${autoupdate.intervalms:-60000}}
+
+  helloLines:
+    - hello from webhooks
