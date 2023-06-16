@@ -11,14 +11,12 @@ openshift.withCluster() { // Use "default" cluster or fallback to OpenShift clus
             // If the project uses Java 11 instead of Java 17, change to
             //   inheritFrom: 'maven',
             // and update the envVars section
-            inheritFrom: 'kb-jenkins-agent-java',
+            inheritFrom: 'maven',
             cloud: 'openshift', //cloud must be openshift
             envVars: [
                     // If the project uses Java 11 instead of Java 17, remove the lines with
                     //   USE_JAVA_VERSION and MAVEN_SKIP_RC
                     // and update inheritsFrom a few lines above
-                    envVar(key: 'USE_JAVA_VERSION', value: 'java-17'),
-                    envVar(key: 'MAVEN_SKIP_RC', value: 'true'),
 
                     //This fixes the error with en_US.utf8 not being found
                     envVar(key:"LC_ALL", value:"C.utf8")
