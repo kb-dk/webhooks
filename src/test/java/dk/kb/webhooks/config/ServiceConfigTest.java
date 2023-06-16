@@ -141,7 +141,7 @@ class ServiceConfigTest {
         {
             String altDBURL = ServiceConfig.getConfig().getString("config.alternative.db");
             // This is http://localhost:23456/mydb2 in webhooks-base.yaml and overwritten in webhooks-local.yaml
-            assertEquals("http://testmachine:8090/foobar/", altDBURL,
+            assertEquals("http://localhost:23456/mydb2", altDBURL,
                          "File bases overriding ov config values should work");
         }
     }
