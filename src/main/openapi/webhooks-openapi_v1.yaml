@@ -40,6 +40,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/HelloReply'
 
+  # Webhook used for Alma Requests
+  # The GET endpoint is used by Alma to check if the webhook is alive
+  # The POST endpoint is used by Alma to send notifications about requests
+  /request:
+    get:
+      tags:
+        - '${project.name}'
+      summary: "Used by Alma to check if the Webhook is alive"
+      operationId: challenge
+      parameters:
+        - name: challenge
+          in: query
+          description: challenge send by Alma
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "A response containing the challenge"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengeResponse'
+    post:
+      tags:
+        - '${project.name}'
+      summary: "Receives webhook notifications on requests in Alma"
+      operationId: receiveWebhookRequests
+      parameters:
+        - name: X-Exl-Signature
+          in: header
+          description: "Base64 encoded HMAC SHA256​ hash of the entire body payload"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
 
   # The ping service should be in all projects, should not do any advanced processing
   # and should respond quickly with a simple message, e.g. "pong".
@@ -64,7 +108,6 @@ paths:
             text/plain:
               schema:
                 type: string
-
   # The status service should be in all projects and should provide a list of running jobs,
   # the overall health of the service and similar. While the endpoint should be kept at
   # /monitor/status, the response should be adjusted to fit the application.
@@ -157,3 +200,12 @@ components:
           format: int32
         message:
           type: string
+
+    ChallengeResponse:
+      type: object
+      required:
+        - challenge
+      properties:
+        challenge:
+          type: string
+          description: "the challenge text"
