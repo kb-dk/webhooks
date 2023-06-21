@@ -7,7 +7,6 @@ target/
 .idea
 *.iml
 
-README_OLD.md
 .openapi-generator/
 conf/webhooks-environment.yaml
 conf/webhooks-local.yaml
