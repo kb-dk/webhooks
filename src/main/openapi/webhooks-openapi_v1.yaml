@@ -78,7 +78,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/xml:
             schema:
               type: string
       responses:
@@ -209,3 +209,4 @@ components:
         challenge:
           type: string
           description: "the challenge text"
+

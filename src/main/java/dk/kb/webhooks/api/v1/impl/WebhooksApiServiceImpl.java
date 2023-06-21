@@ -1,5 +1,6 @@
 package dk.kb.webhooks.api.v1.impl;
 
+import dk.kb.webhooks.WebhookReceiver;
 import dk.kb.webhooks.api.v1.*;
 import dk.kb.webhooks.config.ServiceConfig;
 import dk.kb.webhooks.model.v1.ChallengeResponseDto;
@@ -58,12 +59,19 @@ public class WebhooksApiServiceImpl extends ImplBase implements WebhooksApi {
     }
 
     @Override
-    public void receiveWebhookRequests(String xExlSignature,String notification) {
+    public void receiveWebhookRequests(String xExlSignature, String notification) {
         log.debug("Received webhook notification "+notification);
+        WebhookReceiver.validateRequestSignature(xExlSignature,notification);
+        WebhookReceiver.handleNotification(notification);
+
     }
 
     @Override
     public Response redirect(MessageContext request) {
         return WebhooksApi.super.redirect(request);
     }
+
+
+
+
 }

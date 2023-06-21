@@ -88,4 +88,7 @@ public class ServiceConfig extends AutoYAML {
         return getConfig().getList("config.helloLines");
     }
 
+    public static String getWebhookSecret() {
+        return getConfig().getString("config.webhookSecret");
+    }
 }
